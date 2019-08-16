@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mJarvis</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+
+        $.holdReady( true );
+        $.getScript( "{% static 'scripts/main.js' %}", function() {
+          $.holdReady( false );
+        });
+
+        var mic_icon = "{% static 'icons/microphone.png' %}";
+        var mic_icon_ = "{% static 'icons/microphone_.png' %}";
+
+    </script>
+</head>
+<body>
+
+    <div class="main-content">
+    </div>
+
+    <div class="status">
+        <div class="query">Ankit Kumar Verma</div>
+        <div class="microphone-status"></div>
+        <a class="button" href="#" onclick="mic_pressed()">
+            <img class="microphone" src="{% static 'icons/microphone_.png' %}">
+        </a>
+    </div>
+
+</body>
+</html>

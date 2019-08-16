@@ -1,0 +1,79 @@
+*{
+	box-sizing: border-box;
+}
+html,body{
+	margin: 0;
+	padding: 10px;
+	background-color: #e2e2e2;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.main-content{
+	width: 100%;
+	height: 100%;
+	background-color: #f1f1f1;
+	padding: 10px;
+	border-radius: 10px;
+    overflow: auto;
+}
+
+#player {
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+.microphone{
+    width: 40px;
+    height: 40px;
+    transition: all 1s ease-in-out;
+    z-index: 2;
+}
+
+.status {
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	padding: 5px;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.query{
+    flex-grow: 2;
+    text-align: center;
+}
+
+.query-status {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.microphone-status {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.google-result-description {
+    max-lines: 2;
+}
+
+.google-result {
+    padding: 5px;
+    margin-bottom: 10px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.5);
+}
+
+.youtube-video {
+    width: 100%;
+    height: 100%;
+}

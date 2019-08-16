@@ -1,0 +1,14 @@
+<div class="google">
+    {% for site in result %}
+    <div class="google-result">
+        <a href="{{ site.url }}">{{ site.url }}</a>
+        <br>
+        <div class="google-result-description">
+            {% if site.description is not none %}
+                {{ site.description }}
+            {% endif %}
+        </div>
+        <br>
+    </div>
+    {% endfor %}
+</div>
