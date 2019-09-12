@@ -2,13 +2,15 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, JsonResponse
 from pynput.keyboard import Key, Controller
 from django.template import loader
+import os
 
 keyboard = Controller()
 
+paths = {
+    'video': '/media/akv26/AKVINDIAN/Bollywood Video Songs/'
+}
+
 curr_displaying = None
-order = 0
-result_no = 0
-_order = {'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5, 'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9, 'x': 10}
 
 
 def home(request):
@@ -21,21 +23,9 @@ def fetch(request):
 
     query = request.GET.get('query').lower()
 
-    if 'full screen' in query and curr_displaying:
-        if curr_displaying['type'] == 'youtube':
-            keyboard.press('f')
-            keyboard.release('f')
+    if 'youtube' in query:
 
-        success_data = {
-            'type': 'nothing'
-        }
-
-        return JsonResponse(success_data)
-
-    else:
-
-        # youtube_video
-        video_id = play_youtube(query)
+        video_id = play_youtube(query.replace('youtube ', ''))
 
         success_data = {
             'type': 'youtube',
@@ -44,6 +34,46 @@ def fetch(request):
         }
 
         curr_displaying = success_data
+
+        return JsonResponse(success_data)
+
+    elif 'play' in query or 'play video' in query:
+
+        query = query.replace('play video', '')
+        query = query.replace('play', '')
+
+        ls_ = os.listdir(paths['video'])
+
+        ls = []
+        opened_file = False
+        for i in range(len(ls_)):
+            ls.append({
+                'id': i+1,
+                'title': ls_[i]
+            })
+            if query in ls_[i].lower() and not opened_file:
+                os.open(paths['video']+ls_[i], os.O_RDONLY)
+                opened_file = True
+                print(paths['video']+ls_[i])
+
+        success_data = {
+            'type': 'display',
+            'html': loader.render_to_string('display_list.html', {'list': ls})
+        }
+
+        curr_displaying = success_data
+
+        return JsonResponse(success_data)
+
+    if 'full screen' in query and curr_displaying:
+
+        if curr_displaying['type'] == 'youtube':
+            keyboard.press('f')
+            keyboard.release('f')
+
+        success_data = {
+            'type': 'nothing'
+        }
 
         return JsonResponse(success_data)
 

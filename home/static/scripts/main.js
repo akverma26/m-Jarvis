@@ -67,13 +67,15 @@ function send_query(finalTranscript) {
             }, 3000);
 
             if(data.type == 'youtube'){
-                say_this('Enjoy Sir!');
 
                 if(pop_up != null){
                     pop_up.close();
                 }
                 pop_up = window.open(data.link, finalTranscript, "width=1280, height=720");
                 if (window.focus) { pop_up.focus(); }
+            }
+            else if(data.type == 'display'){
+                $('.main-content').html(data.html);
             }
 
 

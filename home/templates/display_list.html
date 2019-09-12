@@ -1,0 +1,14 @@
+<div class="display-list">
+    {% for element in list %}
+        <div class="list-element">
+            {{ element.id }}. {{ element.title }}
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .list-element{
+        margin: 10px;
+        color: rgb(255,0,0);
+    }
+</style>
